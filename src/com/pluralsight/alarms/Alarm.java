@@ -1,9 +1,10 @@
+package com.pluralsight.alarms;
+
 import java.time.LocalDateTime;
-import java.util.Locale;
 
 public class Alarm {
-    private String message;
-    private boolean isActive;
+    protected final String message;
+    protected boolean isActive;
     private LocalDateTime snoozeUntil;
 
     Alarm(String message) {
@@ -17,7 +18,7 @@ public class Alarm {
     }
 
     public boolean isSnoozing() {
-        return LocalDateTime.now().isAfter(snoozeUntil);
+        return snoozeUntil.isAfter(LocalDateTime.now());
     }
 
     void stopSnoozing() {
@@ -38,7 +39,7 @@ public class Alarm {
         return getReport(false);
     }
 
-    private String getReport(boolean upperCase) {
+    public String getReport(boolean upperCase) {
         if(isActive && !isSnoozing()) {
             if(upperCase) {
                 return message.toUpperCase();
@@ -50,7 +51,7 @@ public class Alarm {
         }
     }
 
-    public String sendReport() {
-        return getReport(true);
+    public void sendReport() {
+        System.out.println(getReport(true));
     }
 }
