@@ -2,21 +2,21 @@ import java.time.LocalDateTime;
 import java.util.Locale;
 
 public class Alarm {
-    String message;
-    boolean isActive;
-    LocalDateTime snoozeUntil;
+    private String message;
+    private boolean isActive;
+    private LocalDateTime snoozeUntil;
 
     Alarm(String message) {
         this.message = message;
     }
 
-    void snooze() {
+    public void snooze() {
         if(isActive) {
             snoozeUntil = LocalDateTime.now().plusSeconds(5);
         }
     }
 
-    boolean isSnoozing() {
+    public boolean isSnoozing() {
         return LocalDateTime.now().isAfter(snoozeUntil);
     }
 
@@ -24,21 +24,21 @@ public class Alarm {
         snoozeUntil = LocalDateTime.now().minusSeconds(1);
     }
 
-    void turnOn() {
+    public void turnOn() {
         this.isActive = true;
         stopSnoozing();
     }
 
-    void turnOff() {
+    public void turnOff() {
         this.isActive = false;
         stopSnoozing();
     }
 
-    String getReport() {
+    public String getReport() {
         return getReport(false);
     }
 
-    String getReport(boolean upperCase) {
+    private String getReport(boolean upperCase) {
         if(isActive && !isSnoozing()) {
             if(upperCase) {
                 return message.toUpperCase();
@@ -50,7 +50,7 @@ public class Alarm {
         }
     }
 
-    String sendReport() {
+    public String sendReport() {
         return getReport(true);
     }
 }

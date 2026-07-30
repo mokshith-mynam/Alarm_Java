@@ -2,6 +2,6 @@ public class Application {
     static void main() {
         Alarm alarm = new Alarm("Temperature too high!");
         alarm.turnOn();
-        System.out.println(alarm.isActive);
+        alarm.snooze();
     }
 }
