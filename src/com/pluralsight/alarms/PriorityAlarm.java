@@ -1,5 +1,8 @@
 package com.pluralsight.alarms;
-public class PriorityAlarm extends Alarm{
+
+import java.awt.*;
+
+public class PriorityAlarm extends Alarm {
     private final int priority;
 
     public PriorityAlarm(String message, int priority) {
@@ -7,7 +10,16 @@ public class PriorityAlarm extends Alarm{
         this.priority = priority;
     }
 
+    public Color getColor() {
+        return Color.GREEN;
+    }
+
     public int getPriority() {
         return priority;
+    }
+
+    @Override
+    public boolean isUrgent() {
+        return getPriority() > 2;
     }
 }

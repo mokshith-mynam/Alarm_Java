@@ -1,8 +1,9 @@
 package com.pluralsight.alarms;
 
 import java.time.LocalDateTime;
+import java.awt.Color;
 
-public class Alarm {
+public abstract class Alarm implements Widget, PersistentObject {
     protected final String message;
     protected boolean isActive;
     private LocalDateTime snoozeUntil;
@@ -11,9 +12,22 @@ public class Alarm {
         this.message = message;
     }
 
+    @Override
+    public String getHelpText() {
+        return "I'm an alarm. You can turn me on or off.";
+    }
+
+    @Override
+    public void save() {
+        System.out.println("Saving...");
+    }
+
+
+    public abstract Color getColor();
+
     public void snooze() {
         if(isActive) {
-            snoozeUntil = LocalDateTime.now().plusSeconds(5);
+            snoozeUntil = LocalDateTime.now().plusHours(2);
         }
     }
 
@@ -50,6 +64,8 @@ public class Alarm {
             return " ";
         }
     }
+
+    public abstract boolean isUrgent();
 
     public void sendReport() {
         System.out.println(getReport(true));
